@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>公司人员工资管理系统登录</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+
+<body class="login-page sidebar-collapse">
+<!-- End Navbar -->
+<div class="container">
+    <h1>登录</h1>
+    <form class="form" method="post" action="LoginServlet.do">
+        <div class="content">
+            <label>
+                <input type="text" class="form-control" name="account" placeholder="用户名">
+            </label>
+        </div>
+        <div class="input-group form-group-no-border input-lg">
+            <label>
+                <input type="password" placeholder="密码" class="form-control" name="password"/>
+            </label>
+        </div>
+        <div class="footer text-center">
+            <input type="submit" class="btn btn-primary btn-round btn-lg btn-block" value="确定">
+        </div>
+    </form>
+</div>
+      <script>
+          const con=document.querySelector('.container');
+
+          let isIn=true;
+          let isOut=false;
+
+          var span;
+
+          con.addEventListener('mouseenter',(e)=>{
+              if(isIn){
+                  let inx=e.clientX-e.target.offsetLeft;
+                  let iny=e.clientY-e.target.offsetTop;
+
+                  let el=document.createElement('span');
+                  el.style.left=inx+'px';
+                  el.style.top=iny+'px';
+                  con.appendChild(el);
+
+                  $('.container span').removeClass('out');
+                  $('.container span').addClass('in');
+                  span=document.querySelector('.container span');
+                  isIn=false;
+                  isOut=true;
+              }
+          })
+          con.addEventListener('mouseleave',(e)=>{
+              if(isOut){
+                  let inx=e.clientX-e.target.offsetLeft;
+                  let iny=e.clientY-e.target.offsetTop;
+                  $('.container span').removeClass('in');
+                  $('.container span').addClass('out');
+                  $('.out').css('left',inx+'px');
+                  $('.out').css('top'+iny+'px');
+                  isOut=false;
+                  setTimeout(()=>{
+                      con.removeChild(span);
+                      isIn=true;
+                  },500)
+              }
+          })
+      </script>
+</body>
+
+</html>
